@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===============================
+   THEME VARIABLES
+================================ */
+
+@layer base {
+  :root {
+    --bg-base: #0d1520;
+
+    --blob-1: #8b4a6b;
+    --blob-2: #6b3a7a;
+    --blob-3: #5a2d6a;
+    --blob-4: #c97d6b;
+    --blob-5: #a66b5a;
+    --blob-dark: #1a0a1a;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* ===============================
+   NOISE GRADIENT BACKGROUND
+================================ */
+
+.noise-gradient {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg-base);
+  z-index: 0;
+}
+
+/* ===============================
+   GRADIENT BLOBS LAYER
+================================ */
+
+.noise-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(ellipse 70% 60% at 30% 50%, var(--blob-1) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 50% at 40% 40%, var(--blob-2) 0%, transparent 45%),
+    radial-gradient(ellipse 50% 40% at 50% 60%, var(--blob-3) 0%, transparent 40%),
+    radial-gradient(ellipse 80% 70% at 70% 50%, var(--blob-4) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 50% at 20% 60%, var(--blob-5) 0%, transparent 45%),
+    radial-gradient(ellipse 100% 100% at 50% 50%, var(--blob-dark) 0%, transparent 80%);
+
+  filter: blur(60px);
+  animation: gradient-shift 15s ease-in-out infinite alternate;
+  z-index: -1;
+}
+
+/* ===============================
+   NOISE OVERLAY
+================================ */
+
+.noise-gradient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.15;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ===============================
+   ANIMATION
+================================ */
+
+@keyframes gradient-shift {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.1) translate(-5%, 3%);
+  }
+  100% {
+    transform: scale(1.05) translate(3%, -2%);
+  }
+}

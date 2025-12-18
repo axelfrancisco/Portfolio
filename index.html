@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Porfolio Website</title>
+
+    <link rel="stylesheet" href="portfolio.css" />
+    <link rel="stylesheet" href="bg.css" />
+    <link rel="shortcut icon" href="/img/pochita.jpg" type="image/jpg" />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    />
+  </head>
+
+  <body>
+    <div class="noise-gradient">
+      <div class="content">
+
+        <header class="reveal">
+          <h1>PORTFOLIO</h1>
+          <nav>
+            <ul>
+              <li><a href="#home">HOME</a></li>
+              <li><a href="#about">ABOUT</a></li>
+              <li><a href="#services">SERVICES</a></li>
+              <li><a href="#skills">SKILLS</a></li>
+              <li><a href="#contact">CONTACT</a></li>
+            </ul>
+          </nav>
+        </header>
+
+        <main id="home">
+
+          <section class="hero reveal">
+            <figure class="hero-image reveal-left">
+              <img src="/img/tite.jpg" alt="Profile photo of Axel Francisco" />
+            </figure>
+
+            <div class="hero-text reveal-right">
+              <h1>HI, WELCOME TO MY PORTFOLIO WEBSITE!</h1>
+              <p>
+                I'm Axel Francisco, an aspiring web developer with a focus on
+                clean design and functional web experiences.
+              </p>
+              <i class="fi fi-sr-thumbs-up" aria-hidden="true"></i>
+            </div>
+          </section>
+
+          <section id="about" class="about-services reveal">
+            <h1>ABOUT</h1>
+            <p>
+              Hi, I'm Axel Francisco, an aspiring web developer with a strong
+              interest in building clean, responsive, and user-friendly
+              websites.
+            </p>
+
+            <p>
+              I am continuously learning and improving my skills in web
+              development and programming.
+            </p>
+          </section>
+
+          <section id="services" class="about-services reveal">
+            <h1>SERVICES</h1>
+            <ul>
+              <li>Web Design and Development</li>
+              <li>Responsive Website Creation</li>
+            </ul>
+          </section>
+
+          <section id="skills" class="skills reveal">
+            <h1>SKILLS</h1>
+
+            <div class="skills-list">
+              <img src="/img/sql.jpg" alt="SQL logo" class="reveal" />
+              <img src="/img/java.jpg" alt="Java logo" class="reveal" />
+              <img src="/img/python.jpg" alt="Python logo" class="reveal" />
+            </div>
+          </section>
+
+          <section id="contact" class="contact reveal">
+            <h1>CONTACT</h1>
+            <p>Feel free to reach out to me at</p>
+
+            <a href="mailto:vanaxelfrancisco200626@gmail.com">
+              <img src="/img/gmail.jpg" alt="gmail" class="reveal" />
+            </a>
+
+            <a href="https://web.telegram.org/k/#-2279935929">
+              <img src="/img/telegram.jpg" alt="telegram" class="reveal" />
+            </a>
+          </section>
+
+        </main>
+      </div>
+    </div>
+
+    <!-- FIXED SMOOTH NAV SCROLL -->
+    <script>
+      const navLinks = document.querySelectorAll("nav a");
+
+      navLinks.forEach(link => {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+
+          const target = document.querySelector(link.getAttribute("href"));
+          if (!target) return;
+
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+        });
+      });
+    </script>
+
+    <!-- SCROLL REVEAL -->
+    <script>
+      const reveals = document.querySelectorAll(".reveal");
+
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      reveals.forEach(el => observer.observe(el));
+    </script>
+
+  </body>
+</html>
